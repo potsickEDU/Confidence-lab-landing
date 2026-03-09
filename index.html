@@ -399,10 +399,13 @@
     .diamond.small-3 { inset: 48%; }
 
     .axis-v,
-    .axis-h {
-      position: absolute;
-      background: rgba(255,255,255,0.12);
-    }
+.axis-h {
+  position: absolute;
+  background: rgba(74,144,255,0.45);
+  box-shadow:
+    0 0 6px rgba(74,144,255,0.35),
+    0 0 14px rgba(74,144,255,0.15);
+}
 
     .axis-v {
       width: 1px;
@@ -420,14 +423,17 @@
       transform: translateY(-50%);
     }
 
-    .shape {
-      position: absolute;
-      inset: 21%;
-      background: linear-gradient(180deg, rgba(47,125,255,0.42), rgba(47,125,255,0.10));
-      clip-path: polygon(50% 4%, 84% 24%, 92% 50%, 70% 82%, 50% 92%, 24% 76%, 10% 50%, 18% 18%);
-      border: 1px solid rgba(121,174,254,0.7);
-      filter: drop-shadow(0 0 24px rgba(47,125,255,0.16));
-    }
+   .shape {
+  position: absolute;
+  inset: 21%;
+  background: linear-gradient(180deg, rgba(47,125,255,0.42), rgba(47,125,255,0.10));
+  clip-path: polygon(50% 4%, 84% 24%, 92% 50%, 70% 82%, 50% 92%, 24% 76%, 10% 50%, 18% 18%);
+  border: 1px solid rgba(121,174,254,0.7);
+
+  filter: drop-shadow(0 0 24px rgba(47,125,255,0.16));
+
+  animation: radarPulse 4s ease-in-out infinite;
+}
 
     .axis-label {
   position: absolute;
@@ -642,6 +648,26 @@
         padding: 28px;
       }
     }
+
+@keyframes radarPulse {
+
+  0% {
+    filter: drop-shadow(0 0 12px rgba(47,125,255,0.15));
+    transform: scale(1);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 28px rgba(47,125,255,0.35));
+    transform: scale(1.02);
+  }
+
+  100% {
+    filter: drop-shadow(0 0 12px rgba(47,125,255,0.15));
+    transform: scale(1);
+  }
+
+}
+    
   </style>
 </head>
 <body>
