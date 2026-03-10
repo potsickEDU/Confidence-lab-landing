@@ -1,463 +1,1226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confidence Lab™</title>
+  <meta
+    name="description"
+    content="Confidence Lab™ trains teens to build stronger presence, speak with more authority, and operate with more social control in group and real-world settings."
+  />
+  <style>
+    :root {
+      --bg: #07090d;
+      --bg-2: #0d1117;
+      --panel: #10151d;
+      --panel-2: #131a24;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(74, 144, 255, 0.35);
+      --text: #f5f7fb;
+      --muted: #9ba8bd;
+      --blue: #2f7dff;
+      --blue-2: #79aefe;
+      --max: 1180px;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
 
-<title>Confidence Lab™</title>
+    * { box-sizing: border-box; }
 
-<meta name="description" content="Confidence Lab™ trains teens to build stronger presence, speak with more authority, and operate with more social control in real-world social environments." />
+    html { scroll-behavior: smooth; }
 
-<style>
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(47,125,255,0.10), transparent 20%),
+        linear-gradient(180deg, rgba(47,125,255,0.05), transparent 15%),
+        var(--bg);
+      line-height: 1.5;
+    }
 
-:root{
---bg:#07090d;
---panel:#10151d;
---line:rgba(255,255,255,0.08);
---text:#f5f7fb;
---muted:#9ba8bd;
---blue:#2f7dff;
---max:1180px;
-}
+    a { color: inherit; text-decoration: none; }
 
-*{box-sizing:border-box}
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
 
-body{
-margin:0;
-font-family:Inter, Arial, sans-serif;
-background:var(--bg);
-color:var(--text);
-line-height:1.5;
-}
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,9,13,0.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 
-.container{
-width:min(calc(100% - 32px),var(--max));
-margin:auto;
-}
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-.section{
-padding:90px 0;
-border-top:1px solid var(--line);
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+    }
 
-.section-title{
-font-size:42px;
-margin-bottom:16px;
-}
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--blue);
+      box-shadow: 0 0 0 5px rgba(47,125,255,0.15);
+    }
 
-.section-lead{
-color:var(--muted);
-max-width:720px;
-}
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
 
-.hero{
-padding:120px 0 80px;
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border: 1px solid var(--line);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
 
-h1{
-font-size:64px;
-line-height:1;
-margin-bottom:20px;
-}
+    .btn:hover { transform: translateY(-1px); }
 
-.btn{
-padding:14px 24px;
-border:1px solid var(--blue);
-background:var(--blue);
-color:white;
-text-decoration:none;
-display:inline-block;
-margin-top:24px;
-}
+    .btn-primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: white;
+      box-shadow: 0 10px 30px rgba(47,125,255,0.22);
+    }
 
-.two-col{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:32px;
-}
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--line-strong);
+      color: var(--text);
+    }
 
-.card{
-background:var(--panel);
-padding:28px;
-border:1px solid var(--line);
-}
+    .hero {
+      padding: 88px 0 72px;
+    }
 
-.metric-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-margin-top:28px;
-}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
 
-.metric{
-background:var(--panel);
-padding:20px;
-border:1px solid var(--line);
-}
+    .eyebrow {
+      display: inline-block;
+      color: var(--blue-2);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+      font-size: 0.76rem;
+      margin-bottom: 18px;
+    }
 
-.steps{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:18px;
-margin-top:30px;
-}
+    h1 {
+      margin: 0 0 20px;
+      font-size: clamp(3rem, 6vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      max-width: 10ch;
+    }
 
-.step{
-background:var(--panel);
-padding:22px;
-border:1px solid var(--line);
-}
+    .hero-copy p,
+    .section-lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 760px;
+      margin: 0;
+    }
 
-.fit-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:24px;
-margin-top:32px;
-}
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
 
-.fit-list{
-background:var(--panel);
-padding:26px;
-border:1px solid var(--line);
-}
+    .hero-card,
+    .card,
+    .step,
+    .framework-item,
+    .fit-list,
+    .metric,
+    .testimonial-card,
+    .faq-item,
+    .outcome-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
 
-.testimonial-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-margin-top:40px;
-}
+    .hero-card {
+      background: var(--panel);
+      border: 1px solid rgba(74,144,255,0.25);
+      box-shadow:
+        0 0 0 1px rgba(74,144,255,0.12),
+        0 20px 60px rgba(0,0,0,0.45);
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.testimonial{
-background:var(--panel);
-padding:26px;
-border:1px solid var(--line);
-font-size:18px;
-}
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.45;
+      pointer-events: none;
+    }
 
-.testimonial span{
-display:block;
-margin-top:12px;
-color:var(--muted);
-}
+    .hero-card > * {
+      position: relative;
+      z-index: 1;
+    }
 
-.outcome-list{
-margin-top:26px;
-display:grid;
-gap:14px;
-}
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
 
-.outcome-list li{
-color:var(--muted);
-}
+    .label {
+      color: var(--blue-2);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
 
-.faq{
-margin-top:30px;
-display:grid;
-gap:24px;
-}
+    .hero-top h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      letter-spacing: -0.04em;
+    }
 
-.faq-item{
-background:var(--panel);
-padding:24px;
-border:1px solid var(--line);
-}
+    .hero-stat {
+      text-align: right;
+      border-left: 1px solid var(--line-strong);
+      padding-left: 16px;
+    }
 
-.cta{
-background:var(--panel);
-padding:50px;
-border:1px solid var(--line);
-text-align:center;
-}
+    .hero-stat strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
 
-@media(max-width:900px){
+    .hero-stat span {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
 
-.two-col,
-.metric-grid,
-.steps,
-.fit-grid,
-.testimonial-grid{
-grid-template-columns:1fr;
-}
+    .signal-grid {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
 
-h1{
-font-size:44px;
-}
+    .signal-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
 
-}
+    .signal-row small {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
 
-</style>
+    .bar {
+      height: 10px;
+      background: #0a0f14;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-2));
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .section {
+      padding: 84px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 3vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+    }
+
+    .section-title.wide {
+      max-width: 16ch;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      padding: 26px;
+    }
+
+    .quote {
+      border-left: 2px solid var(--blue);
+      padding-left: 18px;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      margin: 0 0 10px;
+    }
+
+    .quote-sub {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .metric {
+      padding: 20px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      letter-spacing: -0.04em;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .framework-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .framework-visual {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .radar-box {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .diamond {
+      position: absolute;
+      inset: 12%;
+      border: 1px solid rgba(255,255,255,0.12);
+      transform: rotate(45deg);
+    }
+
+    .diamond.small-1 { inset: 24%; }
+    .diamond.small-2 { inset: 36%; }
+    .diamond.small-3 { inset: 48%; }
+
+    .axis-v,
+    .axis-h {
+      position: absolute;
+      background: rgba(74,144,255,0.45);
+      box-shadow:
+        0 0 6px rgba(74,144,255,0.35),
+        0 0 14px rgba(74,144,255,0.15);
+    }
+
+    .axis-v {
+      width: 1px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+
+    .axis-h {
+      height: 1px;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    .shape {
+      position: absolute;
+      inset: 21%;
+      background: linear-gradient(180deg, rgba(47,125,255,0.42), rgba(47,125,255,0.10));
+      clip-path: polygon(50% 4%, 84% 24%, 92% 50%, 70% 82%, 50% 92%, 24% 76%, 10% 50%, 18% 18%);
+      border: 1px solid rgba(121,174,254,0.7);
+      filter: drop-shadow(0 0 24px rgba(47,125,255,0.16));
+      animation: radarPulse 4s ease-in-out infinite;
+    }
+
+    .axis-label {
+      position: absolute;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: rgba(7,9,13,0.92);
+      border: 1px solid var(--line);
+      padding: 6px 8px;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .axis-label.top { top: 0; left: 50%; transform: translate(-50%, -10px); }
+    .axis-label.right { right: 0; top: 50%; transform: translate(10px, -50%); }
+    .axis-label.bottom { bottom: 0; left: 50%; transform: translate(-50%, 10px); }
+    .axis-label.left { left: 0; top: 50%; transform: translate(-10px, -50%); }
+
+    .framework-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .framework-item {
+      padding: 22px;
+    }
+
+    .framework-item strong {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+    }
+
+    .framework-item em {
+      font-style: normal;
+      color: var(--blue-2);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .framework-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .steps {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      padding: 24px;
+    }
+
+    .step-num {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line-strong);
+      color: var(--blue-2);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .fit-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .fit-list {
+      padding: 24px;
+    }
+
+    .fit-list h3 {
+      margin: 0 0 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.92rem;
+      color: var(--blue-2);
+    }
+
+    .fit-list ul,
+    .outcome-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .fit-list li,
+    .outcome-list li {
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+    }
+
+    .fit-list li:last-child,
+    .outcome-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .fit-list li strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .testimonial-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .testimonial-card {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(47,125,255,0), rgba(47,125,255,0.8), rgba(47,125,255,0));
+    }
+
+    .testimonial-text {
+      margin: 0 0 18px;
+      font-size: 1.16rem;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .testimonial-source {
+      color: var(--blue-2);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+    }
+
+    .outcome-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .outcome-card {
+      padding: 26px;
+    }
+
+    .outcome-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .outcome-card strong {
+      display: block;
+      margin-top: 20px;
+      font-size: 1.3rem;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+    }
+
+    .faq-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .faq-item {
+      padding: 24px;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 10px;
+      font-size: 1.02rem;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .cta-box {
+      background: var(--panel);
+      border: 1px solid rgba(74,144,255,0.35);
+      padding: 40px;
+      box-shadow:
+        0 0 0 1px rgba(74,144,255,0.15),
+        0 20px 60px rgba(0,0,0,0.45);
+    }
+
+    .cta-box h2 {
+      margin: 0 0 14px;
+      font-size: clamp(2.1rem, 4vw, 4.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      max-width: 11ch;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 740px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 42px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .two-col,
+      .framework-grid,
+      .fit-grid,
+      .testimonial-grid,
+      .outcome-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hero {
+        padding: 64px 0 48px;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .btn-row,
+      .mini-grid,
+      .metric-grid,
+      .steps,
+      .testimonial-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .signal-row {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-grid {
+        display: grid;
+      }
+
+      .cta-box {
+        padding: 28px;
+      }
+    }
+
+    @keyframes radarPulse {
+      0% {
+        filter: drop-shadow(0 0 12px rgba(47,125,255,0.15));
+        transform: scale(1);
+      }
+
+      50% {
+        filter: drop-shadow(0 0 28px rgba(47,125,255,0.35));
+        transform: scale(1.02);
+      }
+
+      100% {
+        filter: drop-shadow(0 0 12px rgba(47,125,255,0.15));
+        transform: scale(1);
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<section class="hero">
-<div class="container">
-
-<h1>Confidence isn’t a personality trait. It’s a trainable social skill.</h1>
-
-<p class="section-lead">
-Confidence Lab™ trains teens to build stronger presence, faster initiative, and more conversational control in real-world social environments.
-</p>
-
-<a class="btn" href="https://potsickedu.github.io/Confidence-lab-application-form/">Apply Now</a>
-
-</div>
-</section>
-
-<section class="section">
-<div class="container">
-
-<h2 class="section-title">Most confidence advice fails capable teens.</h2>
-
-<div class="two-col">
-
-<p class="section-lead">
-Most teens are told to wait until they feel confident.
-
-But confidence does not appear first.
-
-Execution does.
-
-Teens need stronger presence, faster entry into conversations, and the ability to operate in group environments under pressure.
-</p>
-
-<div class="card">
-“Be yourself” is not a system.
-
-“Just put yourself out there” is not a training method.
-
-Confidence Lab™ is structured social performance training.
-</div>
-
-</div>
-
-<div class="metric-grid">
-
-<div class="metric">
-<strong>Presence</strong>
-How a teen reads socially when they enter a room.
-</div>
-
-<div class="metric">
-<strong>Initiative</strong>
-How quickly they engage instead of hesitating.
-</div>
-
-<div class="metric">
-<strong>Control</strong>
-How they handle awkward moments and conversation pressure.
-</div>
-
-</div>
-
-</div>
-</section>
-
-<section class="section">
-
-<div class="container">
-
-<h2 class="section-title">How training works</h2>
-
-<div class="steps">
-
-<div class="step">
-<strong>Diagnose the bottleneck</strong>
-Identify the specific variable suppressing social execution.
-</div>
-
-<div class="step">
-<strong>Train the variable</strong>
-Use focused drills and structured reps.
-</div>
-
-<div class="step">
-<strong>Pressure-test the skill</strong>
-Practice under mild social friction.
-</div>
-
-<div class="step">
-<strong>Transfer to real life</strong>
-Skills appear in school, teams, and groups.
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="container">
-
-<h2 class="section-title">Who this program is for</h2>
-
-<div class="fit-grid">
-
-<div class="fit-list">
-
-<strong>Strong fit</strong>
-
-<ul>
-
-<li>Capable teens who hesitate in group settings</li>
-
-<li>Teens who know what to say but wait too long</li>
-
-<li>Teens who need stronger voice and presence</li>
-
-<li>Teens who respond well to structured practice</li>
-
-</ul>
-
-</div>
-
-<div class="fit-list">
-
-<strong>What parents want to see change</strong>
-
-<ul>
-
-<li>Faster initiative in conversations</li>
-
-<li>Better first impressions</li>
-
-<li>Stronger conversational control</li>
-
-<li>Visible changes outside the session</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="container">
-
-<h2 class="section-title">What parents are seeing</h2>
-
-<p class="section-lead">
-Parents usually notice the first shifts within the first few sessions — longer conversations, more initiative, and stronger presence in social environments.
-</p>
-
-<div class="testimonial-grid">
-
-<div class="testimonial">
-“She learned something in the first class that completely changed how she approaches new experiences.”
-<span>Parent</span>
-</div>
-
-<div class="testimonial">
-“He’s able to carry the conversation before they fizzle out.”
-<span>Parent</span>
-</div>
-
-<div class="testimonial">
-“My son came out of his shell.”
-<span>Parent</span>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="container">
-
-<h2 class="section-title">What changes in eight weeks</h2>
-
-<ul class="outcome-list">
-
-<li>Enter conversations without hesitation</li>
-
-<li>Join group dynamics with control</li>
-
-<li>Speak without over-calculating responses</li>
-
-<li>Recover quickly from awkward moments</li>
-
-<li>Advocate for themselves with teachers and coaches</li>
-
-<li>Initiate conversations in unfamiliar environments</li>
-
-<li>Operate visibly instead of fading into the background</li>
-
-</ul>
-
-<p class="section-lead">
-They are no longer passive participants.
-
-They become socially operational.
-</p>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="container">
-
-<h2 class="section-title">Answering the quiet questions</h2>
-
-<div class="faq">
-
-<div class="faq-item">
-<strong>“They understand what to do. Why don’t they do it?”</strong>
-Knowing is cognitive. Execution is conditioned. Confidence Lab™ trains the execution layer.
-</div>
-
-<div class="faq-item">
-<strong>“What if they’re introverted?”</strong>
-Introversion is not the issue. Hesitation under social pressure is. Presence is calibrated to personality.
-</div>
-
-<div class="faq-item">
-<strong>“Why does my capable teen disappear in groups?”</strong>
-Group environments reward fast social entry. Teens who hesitate quickly become invisible.
-</div>
-
-<div class="faq-item">
-<strong>“What if we’ve already tried therapy?”</strong>
-Therapy builds awareness. Confidence Lab™ builds behavioral reps in real environments.
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="container">
-
-<div class="cta">
-
-<h2>Social positioning compounds.</h2>
-
-<p class="section-lead">
-The earlier it is built, the more doors it quietly opens.
-</p>
-
-<a class="btn" href="https://potsickedu.github.io/Confidence-lab-application-form/">Apply to Confidence Lab™</a>
-
-</div>
-
-</div>
-
-</section>
-
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>Confidence Lab™</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#system">System</a>
+        <a href="#how">How It Works</a>
+        <a href="#fit">Who It’s For</a>
+      </nav>
+
+      <a class="btn btn-secondary" href="https://potsickedu.github.io/Confidence-lab-application-form/">
+        Apply Now
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Engineered social positioning training for teens</div>
+          <h1>Confidence isn’t a trait. It’s a trainable social skill.</h1>
+          <p>
+            Confidence Lab™ trains teens to build stronger presence, speak with more
+            authority, and operate with more social control in group and real-world settings.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-secondary" href="https://potsickedu.github.io/Confidence-lab-application-form/">
+              Apply Now
+            </a>
+
+            <a class="btn btn-secondary" href="#system">
+              See How It Works
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="hero-top">
+            <div>
+              <div class="label">Confidence Lab System</div>
+              <h2>Four-Index Training Model</h2>
+            </div>
+            <div class="hero-stat">
+              <strong>4</strong>
+              <span>Core Variables</span>
+            </div>
+          </div>
+
+          <div class="signal-grid">
+            <div class="signal-row">
+              <small>Entry Speed</small>
+              <div class="bar"><span style="width: 78%;"></span></div>
+            </div>
+            <div class="signal-row">
+              <small>Composure Under Pressure</small>
+              <div class="bar"><span style="width: 64%;"></span></div>
+            </div>
+            <div class="signal-row">
+              <small>Leadership Presence</small>
+              <div class="bar"><span style="width: 86%;"></span></div>
+            </div>
+            <div class="signal-row">
+              <small>Opportunity Readiness</small>
+              <div class="bar"><span style="width: 70%;"></span></div>
+            </div>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <strong>Structured Reps</strong>
+              <p>Not generic encouragement. Specific drills and behavioral reps.</p>
+            </div>
+            <div class="mini-card">
+              <strong>Real-World Transfer</strong>
+              <p>Built for group settings, initiation moments, and live conversation.</p>
+            </div>
+            <div class="mini-card">
+              <strong>Clear Variables</strong>
+              <p>Parents see an organized system instead of vague “confidence coaching.”</p>
+            </div>
+            <div class="mini-card">
+              <strong>Premium Feel</strong>
+              <p>Strong hierarchy, sharp visuals, disciplined layout, technical tone.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="problem" class="section">
+      <div class="container">
+        <div class="eyebrow">Why normal confidence advice fails</div>
+
+        <div class="two-col">
+          <div>
+            <h2 class="section-title">Most teens are told to wait for confidence.</h2>
+            <p class="section-lead">
+              That advice fails because it treats confidence like a feeling instead of a trainable behavior.
+              Teens do not need more soft encouragement. They need stronger presence, faster initiative,
+              better conversational control, and more visible execution in the moments that matter.
+            </p>
+          </div>
+
+          <div class="card">
+            <p class="quote">
+              “Be yourself” is not a system. “Just put yourself out there” is not a training method.
+            </p>
+            <p class="quote-sub">
+              Confidence Lab™ is positioned for parents who want a sharper, more measurable path.
+            </p>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric">
+            <strong>Presence</strong>
+            <span>How a teen enters, carries themselves, and reads socially on first contact.</span>
+          </div>
+          <div class="metric">
+            <strong>Initiative</strong>
+            <span>How quickly they engage instead of waiting, fading, or overthinking.</span>
+          </div>
+          <div class="metric">
+            <strong>Control</strong>
+            <span>How well they handle awkwardness, pressure, and live conversation.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="system" class="section">
+      <div class="container">
+        <div class="eyebrow">The Confidence Lab™ training system</div>
+        <h2 class="section-title">A premium parent offer should feel engineered.</h2>
+        <p class="section-lead">
+          Use a system-driven visual structure: clear variables, strong design, technical accents,
+          sharp hierarchy, and language that signals seriousness, precision, and value.
+        </p>
+
+        <div class="framework-grid">
+          <div class="framework-visual">
+            <div class="radar-box">
+              <div class="diamond"></div>
+              <div class="diamond small-1"></div>
+              <div class="diamond small-2"></div>
+              <div class="diamond small-3"></div>
+              <div class="axis-v"></div>
+              <div class="axis-h"></div>
+              <div class="shape"></div>
+
+              <div class="axis-label top">Leadership Presence</div>
+
+              <div class="axis-label right">
+                Opportunity<br>Readiness
+              </div>
+
+              <div class="axis-label bottom">Composure Under Pressure</div>
+              <div class="axis-label left">Entry Speed</div>
+            </div>
+          </div>
+
+          <div class="framework-side">
+            <div class="framework-item">
+              <strong>Entry Speed Index <em>01</em></strong>
+              <p>Measures hesitation versus action. Faster entry changes how a teen is perceived immediately.</p>
+            </div>
+            <div class="framework-item">
+              <strong>Composure Under Pressure Index <em>02</em></strong>
+              <p>Measures steadiness under pressure, interruption, awkwardness, or minor social resistance.</p>
+            </div>
+            <div class="framework-item">
+              <strong>Leadership Presence Index <em>03</em></strong>
+              <p>Measures voice, posture, decisiveness, and the strength of a teen’s social signal.</p>
+            </div>
+            <div class="framework-item">
+              <strong>Opportunity Readiness Index <em>04</em></strong>
+              <p>Measures how ready a teen is to contribute, lead, initiate, and be noticed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="container">
+        <div class="eyebrow">How training works</div>
+        <h2 class="section-title">Structured reps. Real-world application.</h2>
+        <p class="section-lead">
+          Confidence Lab™ should read like a premium system: diagnose the bottleneck, run focused drills,
+          pressure-test the skill, then transfer it to real situations.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Diagnose the bottleneck</h3>
+            <p>Identify the variable suppressing visibility, initiative, or authority.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Train the variable</h3>
+            <p>Use focused drills and targeted reps instead of broad, vague coaching.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Pressure-test execution</h3>
+            <p>Apply the behavior under mild social friction so it becomes usable under pressure.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <h3>Transfer to daily life</h3>
+            <p>Build visible carryover into school, teams, groups, and new social environments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" class="section">
+      <div class="container">
+        <div class="eyebrow">Who it’s for</div>
+        <h2 class="section-title">For capable teens who need stronger social signal.</h2>
+        <p class="section-lead">
+          This is not framed as therapy. It is positioned as high-structure skills training for teens
+          who have real upside but are not yet showing up with enough presence, initiative, visibility,
+          or conversational control.
+        </p>
+
+        <div class="fit-grid">
+          <div class="fit-list">
+            <h3>Strong fit</h3>
+            <ul>
+              <li>
+                <strong>High-capability, low-visibility teens</strong>
+                Bright teens who do not project their value clearly enough in group settings.
+              </li>
+              <li>
+                <strong>Teens who hesitate socially</strong>
+                They often know what to say, but enter late, hold back, or wait too long.
+              </li>
+              <li>
+                <strong>Teens who need stronger authority</strong>
+                Voice, posture, decisiveness, and delivery need sharpening.
+              </li>
+              <li>
+                <strong>Teens ready for reps</strong>
+                They respond well to structure, challenge, accountability, and practical application.
+              </li>
+            </ul>
+          </div>
+
+          <div class="fit-list">
+            <h3>What parents want to see change</h3>
+            <ul>
+              <li>
+                <strong>Faster initiative</strong>
+                Less hesitation. More clean social entry and stronger participation.
+              </li>
+              <li>
+                <strong>Better first impressions</strong>
+                More visible presence in classes, teams, groups, and new environments.
+              </li>
+              <li>
+                <strong>More conversational control</strong>
+                Better pacing, steadiness, response quality, and direction in conversation.
+              </li>
+              <li>
+                <strong>Real-world transfer</strong>
+                Visible changes outside the session, not just “feeling more confident.”
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="section">
+      <div class="container">
+        <div class="eyebrow">What parents are seeing</div>
+
+        <div class="two-col">
+          <div>
+            <h2 class="section-title wide">Early shifts become visible fast.</h2>
+            <p class="section-lead">
+              Parents often notice the change in the first few sessions: stronger initiative,
+              longer conversations, cleaner social entry, and more visible participation in real settings.
+            </p>
+          </div>
+
+          <div class="card">
+            <p class="quote">
+              Parents often notice the shift before their teen can fully explain it.
+            </p>
+            <p class="quote-sub">
+              More initiation. Better conversational carry. Less fading in group settings.
+            </p>
+          </div>
+        </div>
+
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">“She learned something in the first class that completely changed how she approaches new experiences.”</p>
+            <div class="testimonial-source">— Parent</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">“He’s able to carry the conversation before they fizzle out.”</p>
+            <div class="testimonial-source">— Parent</div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">“My son came out of his shell.”</p>
+            <div class="testimonial-source">— Parent</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="outcomes" class="section">
+      <div class="container">
+        <div class="eyebrow">What changes in 8 weeks</div>
+        <h2 class="section-title wide">Visible execution. Not vague “confidence.”</h2>
+        <p class="section-lead">
+          By the end of the intensive, the goal is not just that a teen feels different.
+          The goal is that they operate differently in live social environments.
+        </p>
+
+        <div class="outcome-grid">
+          <div class="outcome-card">
+            <ul class="outcome-list">
+              <li>Enter conversations without hesitation</li>
+              <li>Join group dynamics with more control</li>
+              <li>Speak without over-calculating every response</li>
+              <li>Recover more quickly from awkward moments</li>
+              <li>Advocate for themselves with teachers and coaches</li>
+              <li>Initiate conversation in unfamiliar environments</li>
+              <li>Operate visibly instead of fading into the background</li>
+            </ul>
+          </div>
+
+          <div class="outcome-card">
+            <p>
+              These are not cosmetic shifts. They change how a teen is perceived,
+              how quickly they enter opportunity, and how much social ground they can hold.
+            </p>
+            <strong>
+              They are no longer passive participants.<br>
+              They become socially operational.
+            </strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="questions" class="section">
+      <div class="container">
+        <div class="eyebrow">Answering your quiet questions</div>
+        <h2 class="section-title wide">The questions parents are already asking.</h2>
+        <p class="section-lead">
+          Parents usually do not need more theory. They want to know why a capable teen still hesitates
+          and whether that pattern can actually change.
+        </p>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>“They understand what to do. Why don’t they do it?”</h3>
+            <p>
+              Knowing is cognitive. Execution is conditioned. Confidence Lab™ builds the execution layer
+              through reps, exposure, and practical transfer.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>“What if they’re introverted?”</h3>
+            <p>
+              Introversion is not the issue. Hesitation under pressure is. We calibrate presence to personality —
+              we do not try to manufacture extroversion.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>“Why does my capable teen disappear in groups?”</h3>
+            <p>
+              Because group environments reward speed of entry, clarity of signal, and visible participation.
+              Teens who hesitate often become invisible long before their actual capability is recognized.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>“What if they’ve already tried therapy?”</h3>
+            <p>
+              Therapy builds awareness. Confidence Lab™ builds behavioral reps in real environments.
+              Different mechanism. Different result.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container two-col">
+        <div>
+          <div class="eyebrow">Parent reassurance</div>
+          <h2 class="section-title">Clear. Organized. Measurable.</h2>
+          <p class="section-lead">
+            The page should reassure parents immediately: this is structured training, not fluff,
+            not soft motivational coaching, and not vague advice.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="display:grid; gap:16px;">
+            <div>
+              <strong style="display:block; margin-bottom:6px;">No fluff</strong>
+              <span style="color:var(--muted);">The copy and design should both feel sharp, expensive, and controlled.</span>
+            </div>
+            <div>
+              <strong style="display:block; margin-bottom:6px;">System-first positioning</strong>
+              <span style="color:var(--muted);">Everything should feel like a premium method, not generic inspiration.</span>
+            </div>
+            <div>
+              <strong style="display:block; margin-bottom:6px;">High-value visual language</strong>
+              <span style="color:var(--muted);">Strong typography, grid structure, technical accents, and disciplined spacing raise perceived value.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="apply" class="section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="eyebrow">Apply for Confidence Lab™</div>
+          <h2>Social positioning compounds. The earlier it is built, the more doors it quietly opens.</h2>
+          <p>
+            This program is selective and enrollment is limited to preserve high-touch support.
+            We begin with a complimentary Parent Strategy Call to determine whether the fit is right.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="https://potsickedu.github.io/Confidence-lab-application-form/">Apply Now</a>
+            <a class="btn btn-secondary" href="https://calendly.com/itsapotsickeducation/30min">Book a Call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>Confidence Lab™</div>
+      <div>GitHub Pages ready landing page</div>
+    </div>
+  </footer>
 </body>
 </html>
